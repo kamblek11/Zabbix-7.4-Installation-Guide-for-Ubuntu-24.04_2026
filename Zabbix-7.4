@@ -1,26 +1,16 @@
 Zabbix-7.4-Installation-Guide-for-Ubuntu-24.04
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Clone the docker-env repository:
-   ```sh
-   git clone git@github.com:entrata/docker-env.git && cd $(basename $_ .git)
-   ```
-   Note: The $(basename $_ .git) command ensures the directory is named correctly
-
-
 1. Update System & Install Required Packages:
  
       sudo apt update && sudo apt upgrade -y
-      
       sudo apt install openssh-server
-      
       sudo systemctl status ssh
-      
       sudo ufw allow ssh
 
-sudo apt update && sudo apt upgrade -y
-sudo apt install openssh-server
-sudo systemctl status ssh
-sudo ufw allow ssh
+      sudo apt update && sudo apt upgrade -y
+      sudo apt install openssh-server
+      sudo systemctl status ssh
+      sudo ufw allow ssh
 
 2. (Optional) Enable SSH root login:
 
@@ -29,45 +19,45 @@ sudo vi /etc/ssh/sshd_config
 PermitRootLogin yes
 Restart SSH:
 
-sudo systemctl enable ssh
-sudo systemctl restart ssh
+      sudo systemctl enable ssh
+      sudo systemctl restart ssh
 
 3. Install Apache and PHP:
 
-sudo apt install apache2
-sudo apt install php php-{cgi,common,mbstring,net-socket,gd,xml-util,mysql,bcmath,imap,snmp}
-sudo apt install libapache2-mod-php
+      sudo apt install apache2
+      sudo apt install php php-{cgi,common,mbstring,net-socket,gd,xml-util,mysql,bcmath,imap,snmp}
+      sudo apt install libapache2-mod-php
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 4. Install & Configure Zabbix:
 
 a. Switch to root:
 
-sudo -s
+      sudo -s
 
 b. Install Zabbix Repository:
 
-wget https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.4+ubuntu24.04_all.deb
-dpkg -i zabbix-release_latest_7.4+ubuntu24.04_all.deb
-apt update
+      wget https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.4+ubuntu24.04_all.deb
+      dpkg -i zabbix-release_latest_7.4+ubuntu24.04_all.deb
+      apt update
 
 c. Install Zabbix Components:
 
-apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+      apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 3. Install & Configure MySQL
 
 a. Install MySQL Server:
 
-sudo apt update
-sudo apt install mysql-server -y
-sudo systemctl start mysql
-sudo systemctl enable mysql
-sudo systemctl status mysql
+      sudo apt update
+      sudo apt install mysql-server -y
+      sudo systemctl start mysql
+      sudo systemctl enable mysql
+      sudo systemctl status mysql
 
 b. Secure MySQL Installation:
 
-sudo mysql_secure_installation
+      sudo mysql_secure_installation
 
 Recommended options:
 
@@ -82,7 +72,7 @@ Reload privilege tables? → y
 
 Log in to MySQL:
 
-mysql -u root -p
+      mysql -u root -p
 
 Run the following inside the MySQL shell:
 
@@ -103,10 +93,10 @@ Put The Password: database user
 
 Disable trust flag:
 
-mysql -u root -p
+      mysql -u root -p
 
-SET GLOBAL log_bin_trust_function_creators = 0;
-QUIT;
+      SET GLOBAL log_bin_trust_function_creators = 0;
+      QUIT;
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -117,16 +107,16 @@ Edit the configuration:
 sudo vi /etc/zabbix/zabbix_server.conf
 Set the database password:
 
-DBPassword=Password@321
-DBName=inzabbix
-DBUser=inzabbix
+      DBPassword=Password@321
+      DBName=inzabbix
+      DBUser=inzabbix
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 7. Start & Enable Zabbix Services
 
-# sudo systemctl restart zabbix-server zabbix-agent apache2
-# sudo systemctl enable zabbix-server zabbix-agent apache2
+      # sudo systemctl restart zabbix-server zabbix-agent apache2
+      # sudo systemctl enable zabbix-server zabbix-agent apache2
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -149,14 +139,14 @@ sudo nano /etc/zabbix/zabbix_agentd.conf
 
 Update these settings:
 
-# Server=<Zabbix_Server_IP>
-# ServerActive=<Zabbix_Server_IP>
-# Hostname=<Client_Hostname>
+      # Server=<Zabbix_Server_IP>
+      # ServerActive=<Zabbix_Server_IP>
+      # Hostname=<Client_Hostname>
 
 Restart and enable the agent:
 
-# sudo systemctl restart zabbix-agent
-# sudo systemctl enable zabbix-agent
+      # sudo systemctl restart zabbix-agent
+      # sudo systemctl enable zabbix-agent
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
