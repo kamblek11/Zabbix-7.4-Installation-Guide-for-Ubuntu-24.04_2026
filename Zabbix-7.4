@@ -1,7 +1,14 @@
 Zabbix-7.4-Installation-Guide-for-Ubuntu-24.04
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Clone the docker-env repository:
+   ```sh
+   git clone git@github.com:entrata/docker-env.git && cd $(basename $_ .git)
+   ```
+   Note: The $(basename $_ .git) command ensures the directory is named correctly
+
+
 1. Update System & Install Required Packages:
-  ```sh
+ 
       sudo apt update && sudo apt upgrade -y
       
       sudo apt install openssh-server
@@ -9,7 +16,7 @@ Zabbix-7.4-Installation-Guide-for-Ubuntu-24.04
       sudo systemctl status ssh
       
       sudo ufw allow ssh
-   ```
+
 sudo apt update && sudo apt upgrade -y
 sudo apt install openssh-server
 sudo systemctl status ssh
