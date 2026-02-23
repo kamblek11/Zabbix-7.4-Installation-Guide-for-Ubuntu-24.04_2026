@@ -71,13 +71,13 @@ Log in to MySQL:
 
 Run the following inside the MySQL shell:
 
-# CREATE DATABASE inzabbix CHARACTER SET utf8 COLLATE utf8_bin;
-# CREATE USER 'inzabbix'@'localhost' IDENTIFIED BY 'Passsword@321';
-# GRANT ALL PRIVILEGES ON inzabbix.* TO 'inzabbix'@'localhost';
-# FLUSH PRIVILEGES;
-# SHOW DATABASES;
-# QUIT;
-
+# mysql -uroot -p
+password
+mysql> create database inzabbix character set utf8mb4 collate utf8mb4_bin;
+mysql> create user inzabbix@localhost identified by 'password@321';
+mysql> grant all privileges on inzabbix.* to inzabbix@localhost;
+mysql> set global log_bin_trust_function_creators = 1;
+mysql> quit;
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 5. Import Zabbix Database Schema:
